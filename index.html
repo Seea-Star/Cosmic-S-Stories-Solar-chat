@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Solar Chat</title>
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -53,6 +52,14 @@
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    .back-btn {
+      color: #F0E8D5;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 5px;
+      cursor: pointer;
     }
 
     .avatar {
@@ -233,6 +240,23 @@
       transform: scale(1.02);
     }
 
+    /* Footer Credits Box inside Chat */
+    .chat-footer-credits {
+      text-align: center;
+      padding: 40px 20px;
+      color: #F0E8D5;
+      font-size: 13px;
+      opacity: 0.9;
+      border-top: 1px dashed rgba(240, 232, 213, 0.3);
+      margin-top: 30px;
+    }
+
+    .chat-footer-credits a {
+      color: #F0E8D5;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
     /* WhatsApp-style Lightbox */
     #lightbox {
       position: fixed;
@@ -260,10 +284,9 @@
 <body>
 
   <div class="chat-container">
-    <!-- Chat Header -->
     <div class="chat-header">
       <div class="user-info">
-        <i class="fa-solid fa-chevron-left"></i>
+        <a href="https://seea-star.github.io/Cosmic-S-Stories/" class="back-btn"><i class="fa-solid fa-chevron-left"></i></a>
         <div class="avatar">
           <img src="https://raw.githubusercontent.com/gura-code/Story/refs/heads/main/%E2%80%8Bgruppo-pianeti.png" alt="Group" onerror="this.style.display='none'; this.parentNode.innerText='SUN';">
         </div>
@@ -283,11 +306,9 @@
       </div>
     </div>
 
-    <!-- Messages Container -->
     <div class="chat-messages" id="chatBox"></div>
   </div>
 
-  <!-- Lightbox for Image Zoom -->
   <div id="lightbox">
     <img id="lightbox-img" src="" alt="Fullscreen Image">
   </div>
@@ -406,6 +427,12 @@
         chatBox.appendChild(msgDiv);
       });
 
+      // Aggiungiamo in fondo lo spazio con i crediti e il link al tuo sito
+      const footerCredits = document.createElement('div');
+      footerCredits.className = 'chat-footer-credits';
+      footerCredits.innerHTML = `Created by Cosmic-S<br><a href="https://cosmic-seea.neocities.org/" target="_blank">https://cosmic-seea.neocities.org/</a>`;
+      chatBox.appendChild(footerCredits);
+
       // Add zoom event only to chat images
       document.querySelectorAll('.message-img').forEach(img => {
         img.addEventListener('click', (e) => {
@@ -414,7 +441,8 @@
         });
       });
 
-      chatBox.scrollTop = chatBox.scrollHeight;
+      // Rimosso chatBox.scrollTop per fare in modo che parta dall'alto (inizio chat)
+      chatBox.scrollTop = 0;
     }
 
     // Close lightbox on click anywhere
